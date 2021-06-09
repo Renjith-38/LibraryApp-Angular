@@ -17,6 +17,7 @@ var BookSchema = new Schema({
     yearOfPublication: Number,
     genre: String,
     image: String,
+    description:String,
 });
 
 module.exports = mongoose.model('books',BookSchema);

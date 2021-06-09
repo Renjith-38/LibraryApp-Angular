@@ -5,7 +5,8 @@ export class BookModel{
         public authorName:String,
         public yearOfPublication:Number,
         public genre:String,
-        public image:String
+        public image:String,
+        public description:String
     )
     {}
 }

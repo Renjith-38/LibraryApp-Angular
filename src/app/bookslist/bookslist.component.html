@@ -12,7 +12,7 @@
                     <th scope="col">Year of Publication</th>
                     <th scope="col">Genre</th>
                     <th scope="col">Image</th>
-                    <!-- <th scope="col">Operations</th> -->
+                    <th scope="col">Operations</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +23,7 @@
                     <td>{{book.yearOfPublication}}</td>
                     <td>{{book.genre}}</td>
                     <td><img [src]='book.image' [title]='book.bookTitle' [style.width.px]='imageWidth' [style.margin.px]='imageMargin' ></td>
+                    <td><button  class="btn btn-warning">Edit</button> <button class="btn btn-danger">Delete</button></td>
                 </tr>
             </tbody>
         </table>
