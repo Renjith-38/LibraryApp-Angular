@@ -9,6 +9,9 @@ import { AuthorslistComponent } from './authorslist/authorslist.component';
 import { AddbookComponent } from './addbook/addbook.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddauthorComponent } from './addauthor/addauthor.component';
+import { EditbooksComponent } from './editbooks/editbooks.component';
+import { EditauthorsComponent } from './editauthors/editauthors.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { AddauthorComponent } from './addauthor/addauthor.component';
     BookslistComponent,
     AuthorslistComponent,
     AddbookComponent,
-    AddauthorComponent
+    AddauthorComponent,
+    EditbooksComponent,
+    EditauthorsComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

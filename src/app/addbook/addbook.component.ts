@@ -12,13 +12,14 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 export class AddbookComponent implements OnInit {
 
   constructor(private dataService:DataserviceService,private router:Router,public fb:FormBuilder) { }
+  submitted = false;
   book = this.fb.group({
-    bookTitle:[''],
-    authorName:[''],
-    yearOfPublication:[''],
-    genre:[''],
-    image:[''],
-    description:['']
+    bookTitle:['',[Validators.required]],
+    authorName:['',[Validators.required]],
+    yearOfPublication:['',[Validators.required,Validators.pattern('^[0-9]{4}$')]],
+    genre:['',[Validators.required]],
+    image:['',[Validators.required]],
+    description:['',[Validators.required]]
 
   })
 
@@ -26,10 +27,15 @@ export class AddbookComponent implements OnInit {
   }
 
   AddBook(){
+    this.submitted = true;
     this.dataService.AddBooks(this.book.value);
     console.log(this.book.value);
     alert('Book has Been Successfuly added!');
     this.router.navigate(['/books']);
+  }
+
+  get bookForm(){
+    return this.book.controls;
   }
 
 }

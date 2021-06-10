@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { DataserviceService } from '../dataservice.service';
 import { ListitemsService } from '../listitems.service';
 import { AuthorModel } from './author.model';
 
@@ -16,12 +18,30 @@ export class AuthorslistComponent implements OnInit {
 
   authors: AuthorModel[]=[];
 
-  constructor(private listService: ListitemsService) { }
+  constructor(private listService: ListitemsService,private router:Router,private dataService:DataserviceService) { }
 
   ngOnInit(): void {
     this.listService.getAuthors().subscribe((data)=>{
       this.authors = JSON.parse(JSON.stringify(data));
     })
+  }
+
+  editAuthor(author: any){
+    localStorage.setItem('editAuthorid',author._id.toString());
+    this.router.navigate(['edit-author']);
+  }
+
+  deleteAuthor(author:any){
+    var retVal = confirm("Are you sure you want to delete");
+    if(retVal){
+      this.dataService.deleteAuthor(author._id)
+      .subscribe((data)=>{
+        this.authors = this.authors.filter(p=>p!==author);
+      })
+    }
+    else{
+      this.router.navigate(['authors']);
+    }
   }
 
 }

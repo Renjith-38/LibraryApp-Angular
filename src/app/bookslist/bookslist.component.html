@@ -23,7 +23,13 @@
                     <td>{{book.yearOfPublication}}</td>
                     <td>{{book.genre}}</td>
                     <td><img [src]='book.image' [title]='book.bookTitle' [style.width.px]='imageWidth' [style.margin.px]='imageMargin' ></td>
-                    <td><button  class="btn btn-warning">Edit</button> <button class="btn btn-danger">Delete</button></td>
+                    <td><span class="edit" (click)="editBook(book)">
+                            <button class="btn btn-warning">Edit</button>
+                            </span>
+                        <span class="delete">
+                                <button class="btn btn-danger m-1" (click)="deleteBook(book)">Delete</button>
+                            </span>
+                    </td>
                 </tr>
             </tbody>
         </table>

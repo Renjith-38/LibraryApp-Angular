@@ -1,38 +1,16 @@
-<!-- <div class="card">
-    <div class="card-header">
-        <h3 style="text-align: center;">Add Books</h3>
-    </div>
-    <div class="row align-items-stretch">
-        <div class="card-body">
-            <form action="" class="form col-md-5">
-                <div class="form-group">
-                    <label for="">Email</label>
-                    <input type="email" name="" formControlName="email" class="form-control" id="email">
-                  </div>
-                  <br>
-                  <div class="form-group">
-                    <label for="">Password</label>
-                    <input type="password" class="form-control" formControlName="password" name="password" id="password">
-                  </div>
-                  <br>
-                  <button class="btn btn-danger">Register</button>
-            </form>
-        </div>
-    </div>
-</div> -->
 <div class="card">
     <div class="card-header">
-        <h3 style="text-align: center;">Add Books</h3>
+        <h3 style="text-align: center;">Edit Books</h3>
     </div>
     <div class="section py-5">
-        <form id="addBookForm" [formGroup]="book" name="addBookForm" class="input-form" (ngSubmit)="AddBook()" enctype="multipart/form-data" novalidate=true>
+        <form id="addBookForm" [formGroup]="bookForm" (ngSubmit)="updateBook()" class="input-form" enctype="multipart/form-data" novalidate=true>
             <div class="row align-items-stretch mb-5">
                 <div id="success" class="col-md-12 text-center"></div>
                 <div class="col-md-5 mx-3">
                     <div class="form-group">
                         <input class="form-control" formControlName="bookTitle" id="title"  name="bookTitle" type="text" placeholder="Title *" value="" >
                         <span class="text-danger"
-                                *ngIf="(bookForm.bookTitle.touched || submitted) && bookForm.bookTitle.errors?.required">
+                                *ngIf="(formControl.bookTitle.touched || submitted) && formControl.bookTitle.errors?.required">
                                 Title is required
                             </span>
                         <p class="help-block text-danger"></p>
@@ -40,32 +18,32 @@
                     <div class="form-group">
                         <input class="form-control" id="author" formControlName="authorName" name="authorName" type="text" placeholder="Author *" value="">
                         <p class="help-block text-danger"></p>
-                        <span class="text-danger" *ngIf="(bookForm.authorName.touched || submitted) && bookForm.authorName.errors?.required">
+                        <span class="text-danger" *ngIf="(formControl.authorName.touched || submitted) && formControl.authorName.errors?.required">
                                 Author Name is required
                         </span>
                     </div>
                     <div class="form-group">
                         <input class="form-control" id="genre" formControlName="yearOfPublication" name="yearOfPublication" type="text" placeholder="Year of Publication *" value="" required="required" data-validation-required-message="Please enter book genre." />
                         <p class="help-block text-danger"></p>
-                        <span class="text-danger" *ngIf="(bookForm.yearOfPublication.touched || submitted) && bookForm.yearOfPublication.errors?.required">
+                        <span class="text-danger" *ngIf="(formControl.yearOfPublication.touched || submitted) && formControl.yearOfPublication.errors?.required">
                             Year of Publication is required
                         </span>
                         
-                        <span class="text-danger" *ngIf="bookForm.yearOfPublication.errors?.pattern">
+                        <span class="text-danger" *ngIf="formControl.yearOfPublication.errors?.pattern">
                             Enter a valid Year
                         </span>
                     </div>
                     <div class="form-group">
                         <input class="form-control" id="genre" formControlName="genre" name="genre" type="text" placeholder="Genre *" value="" required="required" data-validation-required-message="Please enter book genre." />
                         <p class="help-block text-danger"></p>
-                        <span class="text-danger" *ngIf="(bookForm.genre.touched || submitted) && bookForm.genre.errors?.required">
+                        <span class="text-danger" *ngIf="(formControl.genre.touched || submitted) && formControl.genre.errors?.required">
                             Genre is required
                         </span>
                     </div>
                     <div class="form-group mb-md-0">
                         <input class="form-control" id="img" formControlName="image" name="image" placeholder="Image link*" type="text">
                     </div>
-                    <span class="text-danger" *ngIf="(bookForm.image.touched || submitted) && bookForm.image.errors?.required">
+                    <span class="text-danger" *ngIf="(formControl.image.touched || submitted) && formControl.image.errors?.required">
                         Image link is required
                     </span>
                 </div>
@@ -73,14 +51,14 @@
                     <div class="form-group form-group-textarea mb-md-0">
                         <textarea class="form-control" id="description" formControlName="description" name="description" placeholder="Description *" required="required" data-validation-required-message="Please enter a short description."></textarea>
                         <p class="help-block text-danger"></p>
-                        <span class="text-danger" *ngIf="(bookForm.description.touched || submitted) && bookForm.description.errors?.required">
+                        <span class="text-danger" *ngIf="(formControl.description.touched || submitted) && formControl.description.errors?.required">
                             Description is required
                         </span>
                     </div>
                 </div>
             </div>
             <div class="text-center">
-                <button class="btn btn-primary btn-xl text-uppercase" id="addBookButton" [disabled]="book.invalid" type="submit">Add</button>
+                <button class="btn btn-primary btn-xl text-uppercase" [disabled]="bookForm.invalid" id="addBookButton"  type="submit">Update</button>
             </div>
         </form>
     </div>
