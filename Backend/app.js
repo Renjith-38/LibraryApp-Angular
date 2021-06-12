@@ -1,6 +1,7 @@
 const express = require('express');
 const app = new express;
 const cors = require('cors');
+const mongoose = require('mongoose');
 
 
 const booksRouter = require('./src/routes/booksRoutes');
@@ -10,6 +11,15 @@ const userRouter = require('./src/routes/userRoutes');
 app.use(cors());
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
+
+mongoose.connect('mongodb+srv://userrenjith:userrenjith@projectfiles.dmtoz.mongodb.net/Library?retryWrites=true&w=majority',{
+    useNewUrlParser:true,
+    useUnifiedTopology:true,
+    useCreateIndex:true,
+})
+.then((res)=>{
+    console.log('Mongoose Connected');
+});
 
 app.use('/books',booksRouter);
 app.use('/authors',authorRouter);
