@@ -14,17 +14,17 @@ authorRouter.get('/getauthors',(req,res)=>{
 });
 
 //sending a single author
-authorRouter.get('/:id',(req,res)=>{
+authorRouter.get('/:id',async(req,res)=>{
     const id = req.params.id;
     // console.log(id);
-    authorData.findOne({"_id":id})
+    await authorData.findOne({"_id":id})
     .then((author)=>{
         res.send(author);
     })
 });
 
 //inserting a new author
-authorRouter.post('/insert',verifyToken,(req,res)=>{
+authorRouter.post('/insert',verifyToken,async(req,res)=>{
     res.header('Access-Control-Allow-Origin','*');
     res.header('Access-Control-Allow-Methods: GET,POST,PATCH,PUT,DELETE,OPTIONS');
 
@@ -36,19 +36,19 @@ authorRouter.post('/insert',verifyToken,(req,res)=>{
         description:req.body.author.description
     }
     var author = new authorData(author);
-    author.save();
+    await author.save();
     res.send('Author Added');
 });
 
 //update a book
-authorRouter.put('/update',verifyToken,(req,res)=>{
+authorRouter.put('/update',verifyToken,async(req,res)=>{
     console.log(req.body)
     id=req.body._id;
     authorName=req.body.authorName;
     description=req.body.description,
     image=req.body.image;
     yearOfBirth=req.body.yearOfBirth;
-   authorData.findByIdAndUpdate({"_id":id},
+   await authorData.findByIdAndUpdate({"_id":id},
                                 {$set:{"authorName":authorName,
                                 "description":description,
                                 "image":image,
@@ -60,10 +60,10 @@ authorRouter.put('/update',verifyToken,(req,res)=>{
  })
 
  //delete an author
- authorRouter.delete('/delete/:id',verifyToken,(req,res)=>{
+ authorRouter.delete('/delete/:id',verifyToken,async (req,res)=>{
     id = req.params.id;
     // console.log(id);
-    authorData.findByIdAndDelete({"_id":id})
+    await authorData.findByIdAndDelete({"_id":id})
     .then(()=>{
         console.log('Book Deleted');
         res.send();

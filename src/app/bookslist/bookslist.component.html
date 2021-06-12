@@ -10,8 +10,7 @@
                     <th scope="col">Book Title</th>
                     <th scope="col">Author Name</th>
                     <th scope="col">Year of Publication</th>
-                    <th scope="col">Genre</th>
-                    <th scope="col">Image</th>
+                    <th scope="col">Genre</th>                    
                     <th></th>
                     <th scope="col" *ngIf="authService.loggedIn()">Operations</th>
                 </tr>
@@ -22,9 +21,8 @@
                     <td>{{ book.bookTitle }}</td>
                     <td>{{book.authorName}}</td>
                     <td>{{book.yearOfPublication}}</td>
-                    <td>{{book.genre}}</td>
-                    <td><img [src]='book.image' [title]='book.bookTitle' [style.width.px]='imageWidth' [style.margin.px]='imageMargin' ></td>
-                    <td><button class="btn btn-dark" (click)="open(book.description)">More Info</button></td>
+                    <td>{{book.genre}}</td>                    
+                    <td><button class="btn btn-dark" (click)="open(book)">More Info</button></td>
                     <td><span class="edit" *ngIf="authService.loggedIn()" (click)="editBook(book)">
                             <button class="btn btn-warning">Edit</button>
                             </span>
@@ -37,3 +35,4 @@
         </table>
     </div>
 </div>
+

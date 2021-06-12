@@ -16,6 +16,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
       </button>
     </div>
     <div class="modal-body">
+    <img src="{{image}}"  width="80px" height="100px" alt="">
       <p>{{name}}</p>
     </div>
     <div class="modal-footer">
@@ -25,6 +26,7 @@ import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class NgbdModalContent {
   @Input() name:String;
+  @Input() image:String;
 
   constructor(public activeModal: NgbActiveModal) {}
 }
@@ -72,8 +74,9 @@ export class AuthorslistComponent implements OnInit {
     }
   }
   
-  open(description:any) {
+  open(author:any) {
     const modalRef = this.modalService.open(NgbdModalContent);
-    modalRef.componentInstance.name = description;
+    modalRef.componentInstance.name = author.description;
+    modalRef.componentInstance.image = author.image;
   }
 }

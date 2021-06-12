@@ -9,7 +9,6 @@
                     <th scope="col">#</th>
                     <th scope="col">Author Name</th>
                     <th scope="col">Year of Birth</th>
-                    <th scope="col">Image</th>
                     <th scope="col"></th>
                     <th scope="col" *ngIf="authService.loggedIn()">Operations</th>
                 </tr>
@@ -19,8 +18,7 @@
                     <th scope="row">&#8226;</th>
                     <td>{{author.authorName}}</td>
                     <td>{{author.yearOfBirth}}</td>
-                    <td><img [style.width.px]='imageWidth' [style.margin.px]='imageMargin' [src]='author.image' alt=""></td>
-                    <td><button class="btn btn-dark" (click)="open(author.description)">More Info</button></td>
+                    <td><button class="btn btn-dark" (click)="open(author)">More Info</button></td>
                     <td><span class="edit" *ngIf="authService.loggedIn()">
                         <button class="btn btn-warning" (click)="editAuthor(author)">Edit</button>
                         </span>

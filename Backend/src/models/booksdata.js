@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost:27017/LibraryAngular',{
+mongoose.connect('mongodb+srv://userrenjith:userrenjith@projectfiles.dmtoz.mongodb.net/Library?retryWrites=true&w=majority',{
     useNewUrlParser:true,
     useUnifiedTopology:true,
     useCreateIndex:true,
