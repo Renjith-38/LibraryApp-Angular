@@ -18,6 +18,7 @@ import { ListitemsService } from './listitems.service';
 import { DataserviceService } from './dataservice.service';
 import { AuthenticationService } from './authentication.service';
 import { TokenInterceptorService } from './token-interceptor.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { TokenInterceptorService } from './token-interceptor.service';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
   ],
   providers: [ListitemsService,DataserviceService,AuthenticationService,
     {

@@ -1,15 +1,42 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
 import { DataserviceService } from '../dataservice.service';
 import { ListitemsService } from '../listitems.service';
 import { AuthorModel } from './author.model';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+@Component({
+  selector: 'ngbd-modal-content',
+  template: `
+    <div class="modal-header">
+      <h4 class="modal-title">Description</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>{{name}}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    </div>
+  `
+})
+export class NgbdModalContent {
+  @Input() name:String;
+
+  constructor(public activeModal: NgbActiveModal) {}
+}
+
+
+
 
 
 @Component({
   selector: 'app-authorslist',
   templateUrl: './authorslist.component.html',
-  styleUrls: ['./authorslist.component.css']
+  styleUrls: ['./authorslist.component.css'],
 })
 export class AuthorslistComponent implements OnInit {
   title:String = "Authors";
@@ -19,7 +46,7 @@ export class AuthorslistComponent implements OnInit {
 
   authors: AuthorModel[]=[];
 
-  constructor(private listService: ListitemsService,private router:Router,private dataService:DataserviceService,public authService:AuthenticationService) { }
+  constructor(private listService: ListitemsService,private router:Router,private dataService:DataserviceService,public authService:AuthenticationService,private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.listService.getAuthors().subscribe((data)=>{
@@ -44,5 +71,9 @@ export class AuthorslistComponent implements OnInit {
       this.router.navigate(['authors']);
     }
   }
-
+  
+  open(description:any) {
+    const modalRef = this.modalService.open(NgbdModalContent);
+    modalRef.componentInstance.name = description;
+  }
 }

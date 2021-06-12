@@ -1,9 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
 import { DataserviceService } from '../dataservice.service';
 import { ListitemsService } from '../listitems.service';
 import { BookModel } from './book.model';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
+
+@Component({
+  selector: 'ngbd-modal-content',
+  template: `
+    <div class="modal-header">
+      <h4 class="modal-title">Description</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>{{name}}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    </div>
+  `
+})
+export class NgbdModalContent {
+  @Input() name:String;
+
+  constructor(public activeModal: NgbActiveModal) {}
+}
+
+
+
+
+
 
 @Component({
   selector: 'app-bookslist',
@@ -19,7 +49,7 @@ export class BookslistComponent implements OnInit {
   //store books to display
   books: BookModel[]=[];
 
-  constructor(private  listService:ListitemsService,private router:Router,private dataService:DataserviceService,public authService:AuthenticationService) { }
+  constructor(private  listService:ListitemsService,private router:Router,private dataService:DataserviceService,public authService:AuthenticationService,private modalService: NgbModal) { }
 
 
   ngOnInit(): void {
@@ -48,5 +78,8 @@ export class BookslistComponent implements OnInit {
     }
     
   }
-
+  open(description:any) {
+    const modalRef = this.modalService.open(NgbdModalContent);
+    modalRef.componentInstance.name = description;
+  }
 }
