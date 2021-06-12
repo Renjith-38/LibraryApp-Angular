@@ -1,0 +1,60 @@
+<div class="signup py-5">
+    <form action="" [formGroup]="signupForm" (ngSubmit)="userSignup()" class="input-form">
+        <div class="row">
+            <div class="col-md-4 mx-auto">
+                <div class="card border-4 border-light">
+                    <div class="card-title pt-5" style="text-align: center;">
+                        <h3>SignUp</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group pb-3">
+                            <label for="name" class="text-light">Enter your Name</label>
+                            <input type="text" name="name" formControlName="name" class="form-control">
+                        </div>
+                        <span class="text-danger" *ngIf="(formControl.name.touched || submitted) && formControl.name.errors?.required">
+                            Name is Required
+                        </span>
+                        <div class="form-group py-3">
+                            <label for="email" class="text-light">Enter your Email</label>
+                            <input type="text" name="email" formControlName="email" class="form-control">
+                        </div>
+                        <span class="text-danger" *ngIf="(formControl.email.touched || submitted) && formControl.email.errors?.required">
+                            Email is Required
+                        </span>
+                        <span class="text-danger" *ngIf="(formControl.email.touched || submitted) && formControl.email.errors?.email">
+                            Enter a valid Email
+                        </span>
+                        <div class="form-group py-3">
+                            <label for="password" class="text-light">Enter your Passowrd</label>
+                            <input type="password" formControlName="password" class="form-control" name="password">
+                        </div>
+                        <span class="text-danger" *ngIf="(formControl.password.touched || submitted) && formControl.password.errors?.required">
+                            Password is Required
+                        </span>
+                        <span class="text-danger" *ngIf="(formControl.password.touched || submitted) && formControl.password.errors?.pattern">
+                            Password must contain must be of minimum 8 characters and atleast:(1 digit, 1 uppercase character, 1 lowercase character, 1 special character)
+                        </span>
+                        <div class="form-group py-3">
+                            <label for="mobile" class="text-light">Enter your Mobile Number</label>
+                            <input type="mobile" formControlName="mobile" class="form-control" name="mobile">
+                        </div>
+                        <span class="text-danger" *ngIf="(formControl.mobile.touched || submitted) && formControl.mobile.errors?.required">
+                            Mobile Number is Required
+                        </span>
+                        <span class="text-danger" *ngIf="(formControl.mobile.touched || submitted) && formControl.mobile.errors?.pattern">
+                            Enter a valid 10 digit Mobile Number
+                        </span>
+                        <div class="buton offset-5 py-3">
+                            <button class="btn btn-success" [disabled]="signupForm.invalid">SignUp</button>
+                        </div>
+                        <div class="text-danger text-center" *ngIf="errorMsg">
+                            Email already Exists
+                        </div>
+                    </div>
+                    
+                </div>                
+            </div>
+        </div>
+    </form>
+</div>
+

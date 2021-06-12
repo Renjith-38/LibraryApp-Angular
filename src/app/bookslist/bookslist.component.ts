@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../authentication.service';
 import { DataserviceService } from '../dataservice.service';
 import { ListitemsService } from '../listitems.service';
 import { BookModel } from './book.model';
@@ -18,7 +19,7 @@ export class BookslistComponent implements OnInit {
   //store books to display
   books: BookModel[]=[];
 
-  constructor(private  listService:ListitemsService,private router:Router,private dataService:DataserviceService) { }
+  constructor(private  listService:ListitemsService,private router:Router,private dataService:DataserviceService,public authService:AuthenticationService) { }
 
 
   ngOnInit(): void {

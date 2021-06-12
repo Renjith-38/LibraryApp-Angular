@@ -1,6 +1,7 @@
 const express = require('express');
 const authorRouter = express.Router();
 const authorData = require('../models/authorsdata');
+const verifyToken = require('./verify');
 
 authorRouter.get('/getauthors',(req,res)=>{
     res.header('Access-Control-Allow-Origin','*');
@@ -23,7 +24,7 @@ authorRouter.get('/:id',(req,res)=>{
 });
 
 //inserting a new author
-authorRouter.post('/insert',(req,res)=>{
+authorRouter.post('/insert',verifyToken,(req,res)=>{
     res.header('Access-Control-Allow-Origin','*');
     res.header('Access-Control-Allow-Methods: GET,POST,PATCH,PUT,DELETE,OPTIONS');
 
@@ -40,7 +41,7 @@ authorRouter.post('/insert',(req,res)=>{
 });
 
 //update a book
-authorRouter.put('/update',(req,res)=>{
+authorRouter.put('/update',verifyToken,(req,res)=>{
     console.log(req.body)
     id=req.body._id;
     authorName=req.body.authorName;
@@ -59,7 +60,7 @@ authorRouter.put('/update',(req,res)=>{
  })
 
  //delete an author
- authorRouter.delete('/delete/:id',(req,res)=>{
+ authorRouter.delete('/delete/:id',verifyToken,(req,res)=>{
     id = req.params.id;
     // console.log(id);
     authorData.findByIdAndDelete({"_id":id})

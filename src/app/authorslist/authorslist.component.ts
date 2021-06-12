@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../authentication.service';
 import { DataserviceService } from '../dataservice.service';
 import { ListitemsService } from '../listitems.service';
 import { AuthorModel } from './author.model';
@@ -18,7 +19,7 @@ export class AuthorslistComponent implements OnInit {
 
   authors: AuthorModel[]=[];
 
-  constructor(private listService: ListitemsService,private router:Router,private dataService:DataserviceService) { }
+  constructor(private listService: ListitemsService,private router:Router,private dataService:DataserviceService,public authService:AuthenticationService) { }
 
   ngOnInit(): void {
     this.listService.getAuthors().subscribe((data)=>{

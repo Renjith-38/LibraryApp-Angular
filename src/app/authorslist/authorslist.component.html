@@ -4,13 +4,13 @@
     </div>
     <div class="card-body">
         <table class="table table-striped table-hover">
-            <thead>
+            <thead class="table-dark">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Author Name</th>
                     <th scope="col">Year of Birth</th>
                     <th scope="col">Image</th>
-                    <th scope="col">Operations</th>
+                    <th scope="col" *ngIf="authService.loggedIn()">Operations</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,10 +19,10 @@
                     <td>{{author.authorName}}</td>
                     <td>{{author.yearOfBirth}}</td>
                     <td><img [style.width.px]='imageWidth' [style.margin.px]='imageMargin' [src]='author.image' alt=""></td>
-                    <td><span class="edit">
+                    <td><span class="edit" *ngIf="authService.loggedIn()">
                         <button class="btn btn-warning" (click)="editAuthor(author)">Edit</button>
                         </span>
-                    <span class="delete">
+                    <span class="delete" *ngIf="authService.loggedIn()">
                             <button class="btn btn-danger m-1" (click)="deleteAuthor(author)">Delete</button>
                         </span>
                 </td>

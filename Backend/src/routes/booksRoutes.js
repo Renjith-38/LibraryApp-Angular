@@ -1,6 +1,7 @@
 const express = require('express');
 const booksRouter = express.Router();
-const bookData = require('../models/booksdata')
+const bookData = require('../models/booksdata');
+const verifyToken = require('./verify');
 
 
 booksRouter.get('/getbooks',(req,res)=>{
@@ -13,7 +14,8 @@ booksRouter.get('/getbooks',(req,res)=>{
         })
 });
 
-booksRouter.post('/insert',(req,res)=>{
+
+booksRouter.post('/insert',verifyToken,(req,res)=>{
     res.header('Access-Control-Allow-Origin','*');
     res.header('Access-Control-Allow-Methods: GET,POST,PATCH,PUT,DELETE,OPTIONS');
     // console.log(req.body);
@@ -41,7 +43,7 @@ booksRouter.get('/:id',(req,res)=>{
 });
 
 //updating a book
-booksRouter.put('/update',(req,res)=>{
+booksRouter.put('/update',verifyToken,(req,res)=>{
     console.log(req.body._id)
     id=req.body._id;
     bookTitle=req.body.bookTitle;
@@ -64,7 +66,7 @@ booksRouter.put('/update',(req,res)=>{
  })
 
  //delete a book
- booksRouter.delete('/delete/:id',(req,res)=>{
+ booksRouter.delete('/delete/:id',verifyToken,(req,res)=>{
      id = req.params.id;
      bookData.findByIdAndDelete({"_id":id})
      .then(()=>{
