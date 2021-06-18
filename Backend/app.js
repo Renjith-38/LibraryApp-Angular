@@ -2,17 +2,23 @@ const express = require('express');
 const app = new express;
 const cors = require('cors');
 const mongoose = require('mongoose');
+const path = require('path');
+var dotenv = require('dotenv');
 
 
 const booksRouter = require('./src/routes/booksRoutes');
 const authorRouter = require('./src/routes/authorRoutes');
 const userRouter = require('./src/routes/userRoutes');
 
+const port = process.env.PORT || 3000;
+dotenv.config();
+var url = process.env.mongodb_uri;
+
 app.use(cors());
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 
-mongoose.connect('mongodb+srv://userrenjith:userrenjith@projectfiles.dmtoz.mongodb.net/Library?retryWrites=true&w=majority',{
+mongoose.connect(url,{
     useNewUrlParser:true,
     useUnifiedTopology:true,
     useCreateIndex:true,
@@ -25,18 +31,12 @@ app.use('/books',booksRouter);
 app.use('/authors',authorRouter);
 app.use('/',userRouter);
 
+app.use(express.static(path.join(__dirname,'public')));
 
-// app.post('/signup',(req,res)=>{
-//     console.log('backend reached');
-//     var user = new userdata();
-//     user.name = req.body.user.name;
-//     user.email = req.body.user.email;
-//     user.password = req.body.user.password;
-//     user.mobile = req.body.user.mobile;
-//     console.log(user);
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,'public/index.html'));
+})
 
-// })
-
-app.listen(3000,()=>{
-    console.log("Backend Server ready at port:3000");
+app.listen(port,()=>{
+    console.log("Backend Server ready at port:"+port);
 })

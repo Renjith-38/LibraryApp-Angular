@@ -11,12 +11,12 @@ export class AuthenticationService {
 
   userSignup(user:any){
     // console.log('Reached Servicce');
-    return this.http.post("http://localhost:3000/signup",{'user':user});
+    return this.http.post("signup",{'user':user});
     // .subscribe(data=>{console.log(data)});
   }
 
   userLogin(user:any):Observable<any>{
-    return this.http.post<any>("http://localhost:3000/login",{'user':user})
+    return this.http.post<any>("login",{'user':user})
   }
 
   loggedIn(){

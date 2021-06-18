@@ -10,19 +10,19 @@ export class ListitemsService {
   constructor(private http:HttpClient) { }
   getBooks(){
     console.log("Sending req to sever");
-    return this.http.get("http://localhost:3000/books/getbooks");
+    return this.http.get("books/getbooks");
   }
 
   getAuthors(){
     console.log("request to fetch authors");
-    return this.http.get("http://localhost:3000/authors/getauthors");
+    return this.http.get("authors/getauthors");
   }
 
   getSingleBook(id:any):Observable<any>{
-    return this.http.get<any>("http://localhost:3000/books/"+id);
+    return this.http.get<any>("books/"+id);
   }
 
   getSingleAuthor(id:any):Observable<any>{
-    return this.http.get<any>("http://localhost:3000/authors/"+id);
+    return this.http.get<any>("authors/"+id);
   }
 }

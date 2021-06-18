@@ -8,31 +8,31 @@ export class DataserviceService {
   constructor(private http:HttpClient) { }
 
   AddBooks(book: any){
-    return this.http.post("http://localhost:3000/books/insert",{'book':book})
+    return this.http.post("books/insert",{'book':book})
     .subscribe(data=>{console.log(data)});
   }
   AddAuthor(author:any){
-    return this.http.post("http://localhost:3000/authors/insert",{'author':author})
+    return this.http.post("authors/insert",{'author':author})
     .subscribe(data=>{console.log(data)});
   }
 
   updateBook(book: any){
     console.log('Book Update');
-    return this.http.put("http://localhost:3000/books/update",book)
+    return this.http.put("books/update",book)
     .subscribe(data=>{console.log(data)});
   }
 
   updateAuthor(author:any){
     console.log('Author update');
-    return this.http.put("http://localhost:3000/authors/update",author)
+    return this.http.put("authors/update",author)
     .subscribe(data=>{console.log(data)});
   }
 
   deleteBook(id:any){
-    return this.http.delete("http://localhost:3000/books/delete/"+id);
+    return this.http.delete("books/delete/"+id);
   }
 
   deleteAuthor(id:any){
-    return this.http.delete("http://localhost:3000/authors/delete/"+id);
+    return this.http.delete("authors/delete/"+id);
   }
 }
